@@ -6,39 +6,32 @@ import ResultItem from '@/components/ResultItem.vue';
 <template>
   <div>
     <FormItem>
-      <template #label>Invoice</template>
-    </FormItem>
-    <FormItem>
-      <template #label>MSRP</template>
-    </FormItem>
-    <FormItem>
       <template #label>Base MSRP</template>
     </FormItem>
     <FormItem>
-      <template #label>Destination</template>
+      <template #label>Options Total</template>
+    </FormItem>
+    <FormItem>
+      <template #label>Paint</template>
     </FormItem>
     <ResultItem>
-      <template #label>Total</template>
-      <template #result>0.00</template>
-    </ResultItem>
-    <ResultItem is-red="true">
       <template #label>Holdback</template>
       <template #result>0.00</template>
     </ResultItem>
+    <ResultItem>
+      <template #label>Options Holdback</template>
+      <template #result>0.00</template>
+    </ResultItem>
+    <ResultItem>
+      <template #label>Paint Holdback</template>
+      <template #result>0.00</template>
+    </ResultItem>
     <ResultItem is-red="true">
-      <template #label>FPA</template>
+      <template #label>Total Holdback</template>
       <template #result>0.00</template>
     </ResultItem>
     <ResultItem is-red="true">
       <template #label>IDM</template>
-      <template #result>0.00</template>
-    </ResultItem>
-    <ResultItem is-red="true">
-      <template #label>Trans Credit</template>
-      <template #result>0.00</template>
-    </ResultItem>
-    <ResultItem is-red="true">
-      <template #label>VPB</template>
       <template #result>0.00</template>
     </ResultItem>
   </div>
