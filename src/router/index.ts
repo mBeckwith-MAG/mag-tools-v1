@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import OtherView from '@/views/OtherView.vue'
+import CalcView from '@/views/CalcView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,6 +24,11 @@ const router = createRouter({
       name: 'other',
       component: OtherView,
     },
+    {
+      path: '/vw-calc',
+      name: 'vw-calc',
+      component: CalcView
+    }
   ],
 })
 

@@ -7,8 +7,10 @@ import { RouterLink, RouterView } from 'vue-router'
     <header>
         <p class="display-4 text-center">VW Calculator</p>
         <nav class="row justify-content-center">
-          <RouterLink class="col col-md-3 col-xl-2 btn btn-outline-info m-1" active-class="btn-secondary" to="/">General</RouterLink>
-          <RouterLink class="col col-md-3 col-xl-2 btn btn-outline-info m-1" active-class="btn-secondary" to="/other">ID.4 / BUZZ</RouterLink>
+          <RouterLink class="col col-md-3 col-xl-2 btn btn-outline-info m-1" active-class="btn-secondary" to="/">Home</RouterLink>
+          <!-- <RouterLink class="col col-md-3 col-xl-2 btn btn-outline-info m-1" active-class="btn-secondary" to="/about">About</RouterLink>
+          <RouterLink class="col col-md-3 col-xl-2 btn btn-outline-info m-1" active-class="btn-secondary" to="/other">Other</RouterLink> -->
+          <RouterLink class="col col-md-3 col-xl-2 btn btn-outline-info m-1" active-class="btn-secondary" to="/vw-calc">VW Calcuator</RouterLink>
         </nav>
     </header>
     <div class="container">

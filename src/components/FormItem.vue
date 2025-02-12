@@ -4,7 +4,51 @@
             <slot name="label"></slot>
         </label>
         <div class="col">
-            <input type="number" min="0.00" max="1000000.00" step="0.01" class="form-control" placeholder="0.00">
+            <input
+                class="form-control" 
+                :type="props.type" 
+                :min="props.min" 
+                :max="props.max" 
+                :step="props.step" 
+                :placeholder="props.placeholder"
+                :value="props.modelValue"
+                @input="handleInput"
+            />
         </div>
     </div>
 </template>
+
+<script setup lang="ts">
+const props = defineProps({
+    modelValue: {
+        type: Number || null || undefined,
+        required: false
+    },
+    type: {
+        type: String,
+        default: 'number'
+    },
+    min: {
+        type: Number,
+        default: 0.00
+    },
+    max: {
+        type: Number,
+        default: 10000000.00
+    },
+    step: {
+        type: Number,
+        default: 0.01
+    },
+    placeholder: {
+        type: String,
+        default: '0.00'
+    }
+})
+
+const emit = defineEmits(['inputValue'])
+
+const handleInput = (event:InputEvent) => {
+    emit('inputValue', event.target.value)
+}
+</script>

@@ -3,7 +3,7 @@
         <label class="col col-form-label">
             <slot name="label"></slot>
         </label>
-        <label class="col col-form-label">
+        <label class="col col-form-label ms-4">
             <slot name="result"></slot>
         </label>
     </div>

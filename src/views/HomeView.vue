@@ -1,45 +1,7 @@
-<script setup lang="ts">
-import FormItem from '@/components/FormItem.vue';
-import ResultItem from '@/components/ResultItem.vue';
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
-    <FormItem>
-      <template #label>Invoice</template>
-    </FormItem>
-    <FormItem>
-      <template #label>MSRP</template>
-    </FormItem>
-    <FormItem>
-      <template #label>Base MSRP</template>
-    </FormItem>
-    <FormItem>
-      <template #label>Destination</template>
-    </FormItem>
-    <ResultItem>
-      <template #label>Total</template>
-      <template #result>0.00</template>
-    </ResultItem>
-    <ResultItem is-red="true">
-      <template #label>Holdback</template>
-      <template #result>0.00</template>
-    </ResultItem>
-    <ResultItem is-red="true">
-      <template #label>FPA</template>
-      <template #result>0.00</template>
-    </ResultItem>
-    <ResultItem is-red="true">
-      <template #label>IDM</template>
-      <template #result>0.00</template>
-    </ResultItem>
-    <ResultItem is-red="true">
-      <template #label>Trans Credit</template>
-      <template #result>0.00</template>
-    </ResultItem>
-    <ResultItem is-red="true">
-      <template #label>VPB</template>
-      <template #result>0.00</template>
-    </ResultItem>
+    Home
   </div>
 </template>
