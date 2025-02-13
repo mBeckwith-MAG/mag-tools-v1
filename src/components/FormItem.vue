@@ -6,12 +6,12 @@
         <div class="col">
             <input
                 class="form-control" 
-                :type="props.type" 
-                :min="props.min" 
-                :max="props.max" 
-                :step="props.step" 
-                :placeholder="props.placeholder"
-                :value="props.modelValue"
+                :type="type" 
+                :min="min" 
+                :max="max" 
+                :step="step" 
+                :placeholder="placeholder"
+                :value="modelValue"
                 @input="handleInput"
             />
         </div>
@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
     modelValue: {
         type: Number || null || undefined,
         required: false

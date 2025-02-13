@@ -28,7 +28,7 @@ const { clear } = store
 </script>
 
 <template>
-    <div>
+    <div class="container">
         <div class="row">
             <div class="d-flex justify-content-between">
                 <div class="justify-content-start">
