@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import FormItem from '@/components/FormItem.vue';
 import ResultItem from '@/components/ResultItem.vue';
 import { useVwCalcStore } from '@/stores/vw-calc';
+import MyInput from '@/components/MyInput.vue';
 
 const store = useVwCalcStore()
 const { 
@@ -25,11 +27,14 @@ const {
     getVPB
 } = storeToRefs(store)
 const { clear } = store
+
+const test = ref('')
 </script>
 
 <template>
     <div class="container">
         <div class="row">
+            <MyInput id="testInput" label-text="Test Input Label" v-model="test" /> {{ test }}
             <div class="d-flex justify-content-between">
                 <div class="justify-content-start">
                     <div class="form-check form-check-inline">
@@ -85,7 +90,7 @@ const { clear } = store
             </ResultItem>
         </div>
         <div v-else>
-            <FormItem class="mt-4" :input-value="baseMsrpAmt">
+            <FormItem class="mt-4" @input-value="baseMsrpAmt">
                 <template #label>Base MSRP</template>
             </FormItem>
             <FormItem :input-value="optionsAmt">

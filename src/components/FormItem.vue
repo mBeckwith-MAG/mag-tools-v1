@@ -12,7 +12,7 @@
                 :step="step" 
                 :placeholder="placeholder"
                 :value="modelValue"
-                @input="handleInput"
+                @input="$emit('inputValue', $event.target.value)"
             />
         </div>
     </div>
@@ -47,8 +47,4 @@ defineProps({
 })
 
 const emit = defineEmits(['inputValue'])
-
-const handleInput = (event:InputEvent) => {
-    emit('inputValue', event.target.value)
-}
 </script>
