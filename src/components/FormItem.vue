@@ -4,8 +4,7 @@
             <slot name="label"></slot>
         </label>
         <div class="col">
-            <input
-                class="form-control" 
+            <input class="form-control" 
                 :type="type" 
                 :min="min" 
                 :max="max" 
