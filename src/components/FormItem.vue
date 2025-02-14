@@ -1,50 +1,33 @@
 <template>
     <div class="row">
-        <label class="col col-form-label">
+        <label :for="id" class="col form-label">
             <slot name="label"></slot>
         </label>
-        <div class="col">
-            <input
-                class="form-control" 
-                :type="type" 
-                :min="min" 
-                :max="max" 
-                :step="step" 
-                :placeholder="placeholder"
-                :value="modelValue"
-                @input="$emit('inputValue', $event.target.value)"
-            />
-        </div>
+        <input
+            class="col form-control" 
+            type="number" 
+            min=0.00 
+            max=1000000.00 
+            step=0.01 
+            placeholder="0.00"
+            :value="modelValue"
+            @input="handleInput"
+        />
     </div>
 </template>
 
 <script setup lang="ts">
-defineProps({
-    modelValue: {
-        type: Number || null || undefined,
-        required: false
-    },
-    type: {
-        type: String,
-        default: 'number'
-    },
-    min: {
-        type: Number,
-        default: 0.00
-    },
-    max: {
-        type: Number,
-        default: 10000000.00
-    },
-    step: {
-        type: Number,
-        default: 0.01
-    },
-    placeholder: {
-        type: String,
-        default: '0.00'
-    }
-})
+const emit = defineEmits(['update:modelValue'])
 
-const emit = defineEmits(['inputValue'])
+defineProps<{
+    id: string,
+    modelValue: number | null| undefined
+}>()
+
+function handleInput(event:Event) {
+    if(event.target) {
+        const target = event.target as HTMLInputElement
+        emit('update:modelValue', Number(target.value))
+    }
+}
 </script>

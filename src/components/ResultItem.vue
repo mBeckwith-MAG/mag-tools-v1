@@ -3,14 +3,13 @@
         <label class="col col-form-label">
             <slot name="label"></slot>
         </label>
-        <label class="col col-form-label ms-4">
+        <label class="col col-form-label">
             <slot name="result"></slot>
         </label>
     </div>
 </template>
-
 <script setup>
-import { defineProps, ref } from 'vue';
+import { defineProps } from 'vue';
 
 const props = defineProps({
     isRed: false

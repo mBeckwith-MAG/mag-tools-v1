@@ -1,40 +1,6 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import FormItem from '@/components/FormItem.vue';
-import ResultItem from '@/components/ResultItem.vue';
-import { useVwCalcStore } from '@/stores/vw-calc';
-import MyInput from '@/components/MyInput.vue';
-
-const store = useVwCalcStore()
-const { 
-    modelChoice,
-    invoiceAmt,
-    msrpAmt,
-    baseMsrpAmt,
-    destinationAmt,
-    optionsAmt,
-    paintAmt,
-    canCalculate,
-    getTotal,
-    getHoldback,
-    getOptionsHB,
-    getPaintHB,
-    getTotalHB,
-    getFPA,
-    getIDM,
-    getTrans,
-    getVPB
-} = storeToRefs(store)
-const { clear } = store
-
-const test = ref('')
-</script>
-
 <template>
     <div class="container">
         <div class="row">
-            <MyInput id="testInput" label-text="Test Input Label" v-model="test" /> {{ test }}
             <div class="d-flex justify-content-between">
                 <div class="justify-content-start">
                     <div class="form-check form-check-inline">
@@ -52,16 +18,16 @@ const test = ref('')
             </div>
         </div>
         <div v-if="modelChoice === 'gen'">
-            <FormItem class="mt-4" :input-value="invoiceAmt">
+            <FormItem class="mt-4" id="invoiceAmt" v-model="invoiceAmt">
                 <template #label>Invoice</template>
             </FormItem>
-            <FormItem class="mt-1" :input-value="msrpAmt">
+            <FormItem class="mt-1" id="msrpAmt" v-model="msrpAmt">
                 <template #label>MSRP</template>
             </FormItem>
-            <FormItem class="mt-1" :input-value="baseMsrpAmt">
+            <FormItem class="mt-1" id="baseMsrpAmt" v-model="baseMsrpAmt">
                 <template #label>Base MSRP</template>
             </FormItem>
-            <FormItem class="mt-1" :input-value="destinationAmt">
+            <FormItem class="mt-1" id="destinationAmt" v-model="destinationAmt">
                 <template #label>Destination</template>
             </FormItem>
             <ResultItem>
@@ -90,13 +56,13 @@ const test = ref('')
             </ResultItem>
         </div>
         <div v-else>
-            <FormItem class="mt-4" @input-value="baseMsrpAmt">
+            <FormItem class="mt-4" id="baseMsrpAmt" v-model="baseMsrpAmt">
                 <template #label>Base MSRP</template>
             </FormItem>
-            <FormItem :input-value="optionsAmt">
+            <FormItem class="mt-1" id="optionsAmt" v-model="optionsAmt">
                 <template #label>Options Total</template>
             </FormItem>
-            <FormItem :input-value="paintAmt">
+            <FormItem class="mt-1" id="paintAmt" v-model="paintAmt">
                 <template #label>Paint</template>
             </FormItem>
             <ResultItem>
@@ -122,3 +88,31 @@ const test = ref('')
         </div>
     </div>
 </template>
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { useVwCalcStore } from '@/stores/vw-calc';
+import FormItem from '@/components/FormItem.vue';
+import ResultItem from '@/components/ResultItem.vue';
+
+const store = useVwCalcStore()
+const { 
+    modelChoice,
+    invoiceAmt,
+    msrpAmt,
+    baseMsrpAmt,
+    destinationAmt,
+    optionsAmt,
+    paintAmt,
+    canCalculate,
+    getTotal,
+    getHoldback,
+    getOptionsHB,
+    getPaintHB,
+    getTotalHB,
+    getFPA,
+    getIDM,
+    getTrans,
+    getVPB
+} = storeToRefs(store)
+const { clear } = store
+</script>
