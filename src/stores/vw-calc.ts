@@ -20,6 +20,7 @@ export const useVwCalcStore = defineStore('vw-calc', () => {
     })
 
     const getTotal = computed(() => {
+        // MSRP - Destination
         if(canCalculate) {
             if (msrpAmt.value != null && destinationAmt.value != null) {
                 return Number(Math.round(Number(msrpAmt.value) - Number(destinationAmt.value)).toFixed(2))
@@ -29,6 +30,7 @@ export const useVwCalcStore = defineStore('vw-calc', () => {
     })
 
     const getHoldback = computed(() => {
+        // Base MSRP * 4.8% || Base MSRP * 2%
         if(canCalculate) {
             if(modelChoice.value === "other") {
                 if (baseMsrpAmt.value != null) {
@@ -42,6 +44,7 @@ export const useVwCalcStore = defineStore('vw-calc', () => {
     })
 
     const getOptionsHB = computed(() => {
+        // Options Amount * 2%
         if (optionsAmt.value != null) {
             if(modelChoice.value === "other") {
                 if(optionsAmt.value > 0) {
@@ -53,6 +56,7 @@ export const useVwCalcStore = defineStore('vw-calc', () => {
     })
 
     const getPaintHB = computed(() => {
+        // Paint Amount * 7.8%
         if (paintAmt.value != null) {
             if(modelChoice.value === "other") {
                 if(paintAmt.value > 0) {
@@ -77,6 +81,7 @@ export const useVwCalcStore = defineStore('vw-calc', () => {
     })
 
     const getFPA = computed(() => {
+        // Base MSRP * 1.5%
         if (baseMsrpAmt.value != null) {
             return Math.round(baseMsrpAmt.value * 0.015).toFixed(2)
         }
@@ -84,6 +89,7 @@ export const useVwCalcStore = defineStore('vw-calc', () => {
     })
 
     const getIDM = computed(() => {
+        // Base MSRP * 2% || Base MSRP * 0.8%
         if (baseMsrpAmt.value != null) {
             if(modelChoice.value === "other") {
                 return Math.round(baseMsrpAmt.value * 0.02).toFixed(2)
@@ -94,19 +100,21 @@ export const useVwCalcStore = defineStore('vw-calc', () => {
         return 0.00
     })
 
-    const getTrans = computed(():number => {
+    const getTrans = computed(() => {
+        // Base MSRP * 1.35%
         // if value is under 50 (any hundred amount) round down, else round up next dollar amount
         if (baseMsrpAmt.value != null) {
-            const value = Number((baseMsrpAmt.value * 0.0135).toFixed(2))
-            let val = Math.floor(Math.round(value))
+            const value = (baseMsrpAmt.value * 0.0135).toFixed(2)
+            let val = Math.floor(Math.round(Number(value)))
             const dollarVal = val % 100
-            if (dollarVal > 50) return Number((val + 1).toFixed(2))
-            return Number((val).toFixed(2))
+            if (dollarVal > 50) return (val + 1).toFixed(2)
+            return (val).toFixed(2)
         }
         return 0.00
     })
 
     const getVPB = computed(() => {
+        // Base MSRP * 1.9%
         if (baseMsrpAmt.value != null) {
             return Math.round(baseMsrpAmt.value * 0.019).toFixed(2)
         }
