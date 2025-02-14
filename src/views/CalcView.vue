@@ -34,23 +34,23 @@
                 <template #label>Total</template>
                 <template #result>{{ getTotal }}</template>
             </ResultItem>
-            <ResultItem class="mt-4" is-red="true">
+            <ResultItem class="mt-4" :is-red="true">
                 <template #label>Holdback</template>
                 <template #result>{{ getHoldback }}</template>
             </ResultItem>
-            <ResultItem is-red="true">
+            <ResultItem :is-red="true">
                 <template #label>FPA</template>
                 <template #result>{{ getFPA }}</template>
             </ResultItem>
-            <ResultItem is-red="true">
+            <ResultItem :is-red="true">
                 <template #label>IDM</template>
                 <template #result>{{ getIDM }}</template>
             </ResultItem>
-            <ResultItem is-red="true">
+            <ResultItem :is-red="true">
                 <template #label>Trans Credit</template>
                 <template #result>{{ getTrans }}</template>
             </ResultItem>
-            <ResultItem is-red="true">
+            <ResultItem :is-red="true">
                 <template #label>VPB</template>
                 <template #result>{{ getVPB }}</template>
             </ResultItem>
@@ -77,11 +77,11 @@
                 <template #label>Paint Holdback</template>
                 <template #result>{{ getPaintHB }}</template>
             </ResultItem>
-            <ResultItem class="mt-4" is-red="true">
+            <ResultItem class="mt-4" :is-red="true">
                 <template #label>Total Holdback</template>
                 <template #result>{{ getTotalHB }}</template>
             </ResultItem>
-            <ResultItem is-red="true">
+            <ResultItem :is-red="true">
                 <template #label>IDM</template>
                 <template #result>{{ getIDM }}</template>
             </ResultItem>
@@ -92,7 +92,7 @@
 import { storeToRefs } from 'pinia'
 import { useVwCalcStore } from '@/stores/vw-calc';
 import FormItem from '@/components/FormItem.vue';
-import ResultItem from '@/components/ResultItem.vue';
+import ResultItem from '../components/ResultItem.vue';
 
 const store = useVwCalcStore()
 const { 

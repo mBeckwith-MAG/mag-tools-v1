@@ -8,10 +8,10 @@
         </label>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { defineProps } from 'vue';
 
-const props = defineProps({
-    isRed: false
-})
+defineProps<{
+    isRed?: Boolean
+}>()
 </script>
