@@ -12,7 +12,7 @@ interface Spiff {
 }
 
 export const useSlsBnsStore = defineStore('sls-bns', () => {
-    const report0432: Ref<string[] | number[] | boolean[]> = ref([]);
+    const report0432: Ref<string[] | number[] | boolean[] | unknown[]> = ref([]);
     const currentSalesman = ref(null);
     const addSpiffModal = ref(false);
     const spiffs = ref([])

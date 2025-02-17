@@ -3,7 +3,7 @@
         <input type="file" accept=".xlsx" @change="handleFileUpload">
     </div>
     <div v-else>
-        <div v-for="salesman in salesmen" :key="salesman">
+        <div v-for="salesman in salesmen">
             {{ salesman }}
         </div>
     </div>
@@ -24,7 +24,8 @@ const handleFileUpload = (event) => {
     const reader = new FileReader();
 
     reader.onload = async (e) => {
-        const data = new Uint8Array(e.target.result);
+        if(!e || !e.target || !e.target.result) return;
+        const data: ArrayBuffer | ArrayLike<number> | null = new Uint8Array(e.target.result);
         const workbook = read(data, { type: 'array' });
 
         // Access the first worksheet
