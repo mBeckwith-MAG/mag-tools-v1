@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import OtherView from '@/views/OtherView.vue'
+import OtherView from '@/views/SlsBonusView.vue'
 import CalcView from '@/views/CalcView.vue'
+import SlsBonusView from '@/views/SlsBonusView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,9 +21,9 @@ const router = createRouter({
       component: () => import('@/views/AboutView.vue'),
     },
     {
-      path: '/other',
-      name: 'other',
-      component: OtherView,
+      path: '/sls-bns',
+      name: 'sls-bns',
+      component: SlsBonusView,
     },
     {
       path: '/vw-calc',

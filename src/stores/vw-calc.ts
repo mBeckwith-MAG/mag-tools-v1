@@ -1,4 +1,4 @@
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useVwCalcStore = defineStore('vw-calc', () => {
@@ -14,7 +14,7 @@ export const useVwCalcStore = defineStore('vw-calc', () => {
         if(modelChoice.value === 'gen') {
             if(invoiceAmt.value != null && msrpAmt.value != null && baseMsrpAmt.value != null && destinationAmt.value != null) return true
         } else {
-            if( baseMsrpAmt.value != null && optionsAmt.value != null && paintAmt.value != null) return true
+            if( baseMsrpAmt.value != null && optionsAmt.value != null) return true
         }
         return false
     })
@@ -131,5 +131,5 @@ export const useVwCalcStore = defineStore('vw-calc', () => {
         paintAmt.value = null
     }
 
-    return { modelChoice, invoiceAmt, msrpAmt, baseMsrpAmt, destinationAmt, optionsAmt, paintAmt, canCalculate, getTotal, getHoldback, getOptionsHB, getPaintHB, getTotalHB, getFPA, getIDM, getTrans, getVPB, clear }
+    return { modelChoice, invoiceAmt, msrpAmt, baseMsrpAmt, destinationAmt, optionsAmt, paintAmt, getTotal, getHoldback, getOptionsHB, getPaintHB, getTotalHB, getFPA, getIDM, getTrans, getVPB, canCalculate, clear }
 })

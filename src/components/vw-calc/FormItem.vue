@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="row mt-1">
         <label :for="id" class="col form-label">
             <slot name="label"></slot>
         </label>
@@ -33,3 +33,16 @@ function handleInput(event:Event) {
     }
 }
 </script>
+<style scoped>
+/* Hide the up and down arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+</style>
