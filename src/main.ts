@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'vue-material-design-icons/styles.css';
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
