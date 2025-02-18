@@ -1,4 +1,5 @@
-<template>
+<template>SLS BNS</template>
+<!-- <template>
     <div v-if="!hasReport">
         <input type="file" accept=".xlsx" @change="handleFileUpload">
     </div>
@@ -40,4 +41,4 @@ const handleFileUpload = (event) => {
     };
     reader.readAsArrayBuffer(file);
 }
-</script>
+</script> -->
