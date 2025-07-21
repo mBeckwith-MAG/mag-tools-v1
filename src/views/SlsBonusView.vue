@@ -1,44 +1,52 @@
-<template>SLS BNS</template>
-<!-- <template>
-    <div v-if="!hasReport">
-        <input type="file" accept=".xlsx" @change="handleFileUpload">
-    </div>
-    <div v-else>
+<template>
+    <!-- <input type="file" accept=".xlsx" @change="handleFileUpload" /> -->
+    <UploadFile id="upload0432" @file-data="handle0432" @clear-data="clear0432">
+        <template #label>Upload 0432</template>
+    </UploadFile>
+    <pre>
         <div v-for="salesman in salesmen">
             {{ salesman }}
         </div>
-    </div>
+    </pre>
+
+    <UploadFile
+        id="uploadRoster"
+        @file-data="handleRoster"
+        @clear-data="clearRoster"
+    >
+        <template #label>Upload Roster</template>
+    </UploadFile>
+
+    <pre>
+        <div v-for="rost in roster">
+            {{ rost }}
+        </div>
+    </pre>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSlsBnsStore } from "@/stores/sls-bns";
-import { read, utils } from 'xlsx'
+import UploadFile from "@/components/sls-bns/UploadFile.vue";
 
-const store = useSlsBnsStore()
-const { report0432, salesmen } = storeToRefs(store)
+const store = useSlsBnsStore();
+const { report0432, salesmen } = storeToRefs(store);
 
-const hasReport = ref(false)
+const roster = ref([]);
 
-const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+const handle0432 = (data) => {
+    report0432.value = data;
+};
 
-    reader.onload = async (e) => {
-        if(!e || !e.target || !e.target.result) return;
-        const data: ArrayBuffer | ArrayLike<number> | null = new Uint8Array(e.target.result);
-        const workbook = read(data, { type: 'array' });
+const clear0432 = () => {
+    report0432.value = [];
+};
 
-        // Access the first worksheet
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
+const handleRoster = (data) => {
+    roster.value = data;
+};
 
-        // Convert worksheet data to JSON
-        let jsonData = await utils.sheet_to_json(worksheet, { header: 1 });
-        // jsonData = removeFirst(jsonData);
-        report0432.value = jsonData;
-        hasReport.value = true
-    };
-    reader.readAsArrayBuffer(file);
-}
-</script> -->
+const clearRoster = () => {
+    roster.value = [];
+};
+</script>
