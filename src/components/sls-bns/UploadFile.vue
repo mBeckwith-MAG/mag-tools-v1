@@ -6,19 +6,17 @@
             accept=".xlsx, .xls"
             @change="handleUpload"
         />
-        <label :for="id" class="btn btn-secondary">
-            <slot name="label"></slot>
-        </label>
+        <label :for="id" class="btn btn-secondary">Upload {{ id }}</label>
     </div>
     <div v-else>
-        <button @click="handleClear" class="btn btn-secondary">CLEAR</button>
+        <button @click="handleClear" class="btn btn-secondary">Clear {{ id }}</button>
     </div>
 </template>
 <script setup lang="ts">
 import { defineEmits, ref } from "vue";
 import { read, utils } from "xlsx";
 
-defineProps<{
+const props = defineProps<{
     id: string;
 }>();
 
@@ -34,14 +32,14 @@ const handleUpload = (event: Event) => {
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const jsonData = utils.sheet_to_json(worksheet, { header: 1 });
-        emit("fileData", jsonData);
+        emit("fileData", {id: props.id, data:jsonData});
         hasData.value = true;
     };
     reader.readAsArrayBuffer(file);
 };
 
 const handleClear = () => {
-    emit("clearData");
+    emit("clearData", props.id);
     hasData.value = false;
 };
 </script>

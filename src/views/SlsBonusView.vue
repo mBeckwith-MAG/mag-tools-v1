@@ -1,52 +1,47 @@
 <template>
-    <!-- <input type="file" accept=".xlsx" @change="handleFileUpload" /> -->
-    <UploadFile id="upload0432" @file-data="handle0432" @clear-data="clear0432">
-        <template #label>Upload 0432</template>
-    </UploadFile>
-    <pre>
-        <div v-for="salesman in salesmen">
-            {{ salesman }}
-        </div>
-    </pre>
-
+    <UploadFile id="0432" @file-data="handleUpload" @clear-data="handleClear" />
     <UploadFile
-        id="uploadRoster"
-        @file-data="handleRoster"
-        @clear-data="clearRoster"
-    >
-        <template #label>Upload Roster</template>
-    </UploadFile>
-
-    <pre>
-        <div v-for="rost in roster">
-            {{ rost }}
-        </div>
-    </pre>
+        id="Roster"
+        @file-data="handleUpload"
+        @clear-data="handleClear"
+    />
+    <div v-if="!currentSalesman">
+        <SalesmenList />
+    </div>
+    <div v-else>
+        <pre>{{ deals }}</pre>
+    </div>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
-import { useSlsBnsStore } from "@/stores/sls-bns";
+import { useSls0432Store } from "@/stores/sls-0432";
 import UploadFile from "@/components/sls-bns/UploadFile.vue";
+import SalesmenList from "@/components/sls-bns/SalesmenList.vue";
 
-const store = useSlsBnsStore();
-const { report0432, salesmen } = storeToRefs(store);
+const store = useSls0432Store();
+const { reportHeader, report, salesmen, currentSalesman, deals } = storeToRefs(store);
 
 const roster = ref([]);
 
-const handle0432 = (data) => {
-    report0432.value = data;
+const handleUpload = (result) => {
+    switch(result.id) {
+        case '0432':
+            [reportHeader.value, ...report.value] = result.data;
+            salesmen.value;
+        break;
+        case 'Roster': roster.value = result.data;
+        break; 
+    }
 };
 
-const clear0432 = () => {
-    report0432.value = [];
-};
-
-const handleRoster = (data) => {
-    roster.value = data;
-};
-
-const clearRoster = () => {
-    roster.value = [];
+const handleClear = (id) => {
+    currentSalesman.value = null;
+    switch(id) {
+        case '0432': report.value = [];
+        break;
+        case 'Roster': roster.value = [];
+        break; 
+    }
 };
 </script>
