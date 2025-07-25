@@ -1,12 +1,28 @@
 <template>
     <div class="accordion" id="salesmanList">
-        <div class="accordion-item" v-for="salesman in salesmen">
+        <div
+            class="accordion-item"
+            v-for="salesman in salesmen"
+            :key="salesman.id"
+        >
             <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" :data-bs-target="`#collapse${salesman.id}`" aria-expanded="true" :aria-controls="`collapse${salesman.id}`">
-                    {{ salesman.name }}
+                <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    :data-bs-target="`#collapse${salesman.id}`"
+                    aria-expanded="true"
+                    :aria-controls="`collapse${salesman.id}`"
+                >
+                    {{ salesman.name }} - UNIT COUNT:
+                  {{ allDeals[salesman.id].length }}
                 </button>
             </h2>
-            <div :id="`collapse${salesman.id}`" class="accordion-collapse collapse show" data-bs-parent="#salesmanList">
+            <div
+                :id="`collapse${salesman.id}`"
+                class="accordion-collapse collapse show"
+                data-bs-parent="#salesmanList"
+            >
                 <div class="accordion-body">
                     <pre v-for="deal in allDeals[salesman.id]" :key="deal.id">
                         {{ deal }}
