@@ -1,10 +1,14 @@
 <template>
-    <UploadFile id="0432" @file-data="handleUpload" @clear-data="handleClear" />
-    <UploadFile
-        id="Roster"
-        @file-data="handleUpload"
-        @clear-data="handleClear"
-    />
+    <div class="d-flex justify-content-row p-2">
+        <UploadFile id="0432" @file-data="handleUpload" @clear-data="handleClear" />
+        <UploadFile
+            id="Roster"
+            @file-data="handleUpload"
+            @clear-data="handleClear"
+            class="ms-2"
+        />
+    </div>
+    
     <div v-if="!currentSalesman">
         <SalesmenList />
     </div>
@@ -20,7 +24,7 @@ import UploadFile from "@/components/sls-bns/UploadFile.vue";
 import SalesmenList from "@/components/sls-bns/SalesmenList.vue";
 
 const store = useSls0432Store();
-const { reportHeader, report, salesmen, currentSalesman, deals } = storeToRefs(store);
+const { reportHeader, report, salesmen, currentSalesman, deals, getUnitCount } = storeToRefs(store);
 
 const roster = ref([]);
 

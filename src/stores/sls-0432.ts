@@ -33,6 +33,13 @@ class Vehicle {
   }
 }
 
+function convertDate(dateNumber) {
+    const date = new Date((dateNumber - 25569) * 86400 * 1000).toDateString();
+    const splitDate = date.split(' ');
+    const combi = [splitDate[1], splitDate[2]];
+    return combi.join(' ');
+}
+
 export const useSls0432Store = defineStore("sls-0432", () => {
   const reportHeader: Ref<string[]> = ref([]);
   const report: Ref<string[] | number[]> = ref([]);
@@ -107,7 +114,7 @@ export const useSls0432Store = defineStore("sls-0432", () => {
     report.value.forEach((row) => {
       const id = row[idCol];
       const dealId = row[cols.value["reference"]];
-      const date = row[cols.value["date"]];
+      const date = convertDate(row[cols.value["date"]]);
       const vehicle = new Vehicle(
         row[cols.value["stock"]],
         row[cols.value["description"]],
@@ -129,6 +136,18 @@ export const useSls0432Store = defineStore("sls-0432", () => {
     return obj;
   });
 
+  const getUnitCount = computed(() => {
+    const obj = {};
+    const keys = Object.keys(allDeals.value);
+
+    keys.forEach(key => {
+        obj[key] = allDeals.value[key].reduce((acc, curr) => {
+            return acc + curr.unitCount;
+        }, 0);
+    });
+    return obj;
+  });
+
   return {
     reportHeader,
     report,
@@ -137,5 +156,6 @@ export const useSls0432Store = defineStore("sls-0432", () => {
     currentSalesman,
     deals,
     allDeals,
+    getUnitCount
   };
 });
