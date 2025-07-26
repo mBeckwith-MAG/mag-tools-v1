@@ -1,6 +1,19 @@
 import { computed, ref, type Ref } from "vue";
 import { defineStore } from "pinia";
 
+enum COL {
+  date = "Date",
+  dealID = "Reference#",
+  empID = "Salesperson#",
+  emp = "Salesperson Name",
+  vehID = "Stock#",
+  vehDesc = "Description",
+  vehType = "Sale Type",
+  commGross = "COMMBL GROSS",
+  units = "Units",
+  commAmount = "Commission Amount",
+}
+
 interface Salesman {
   id: number;
   name: string;
@@ -33,42 +46,17 @@ class Vehicle {
   }
 }
 
-function convertDate(dateNumber) {
-    const date = new Date((dateNumber - 25569) * 86400 * 1000).toDateString();
-    const splitDate = date.split(' ');
-    const combi = [splitDate[1], splitDate[2]];
-    return combi.join(' ');
+function convertDate(dateNumber: number) {
+  const date = new Date((dateNumber - 25569) * 86400 * 1000).toDateString();
+  const splitDate = date.split(" ");
+  const combi = [splitDate[1], splitDate[2]];
+  return combi.join(" ");
 }
 
 export const useSls0432Store = defineStore("sls-0432", () => {
   const reportHeader: Ref<string[]> = ref([]);
   const report: Ref<string[] | number[]> = ref([]);
   const currentSalesman: Ref<number | null> = ref(null);
-
-  const colNames = [
-    "Date",
-    "Reference#",
-    "Salesperson#",
-    "Salesperson Name",
-    "Stock#",
-    "Description",
-    "Sale Type",
-    "COMMBL GROSS",
-    "Units",
-    "Commission Amount",
-  ];
-  const cols = computed(() => {
-    const obj = {};
-    colNames.forEach((col) => {
-      obj[
-        col
-          .toLowerCase()
-          .trim()
-          .replace(/[' '#%]/g, "")
-      ] = reportHeader.value.indexOf(col);
-    });
-    return obj;
-  });
 
   const salesmen = computed(() => {
     const idCol = cols.value["salesperson"];
@@ -140,10 +128,10 @@ export const useSls0432Store = defineStore("sls-0432", () => {
     const obj = {};
     const keys = Object.keys(allDeals.value);
 
-    keys.forEach(key => {
-        obj[key] = allDeals.value[key].reduce((acc, curr) => {
-            return acc + curr.unitCount;
-        }, 0);
+    keys.forEach((key) => {
+      obj[key] = allDeals.value[key].reduce((acc, curr) => {
+        return acc + curr.unitCount;
+      }, 0);
     });
     return obj;
   });
@@ -151,11 +139,10 @@ export const useSls0432Store = defineStore("sls-0432", () => {
   return {
     reportHeader,
     report,
-    cols,
     salesmen,
     currentSalesman,
     deals,
     allDeals,
-    getUnitCount
+    getUnitCount,
   };
 });
