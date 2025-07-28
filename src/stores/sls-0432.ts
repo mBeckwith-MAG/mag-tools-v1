@@ -58,9 +58,18 @@ export const useSls0432Store = defineStore("sls-0432", () => {
   const report: Ref<string[] | number[]> = ref([]);
   const currentSalesman: Ref<number | null> = ref(null);
 
+  const cols = computed(() => {
+    const colVals = Object.values(COL);
+    const obj = {};
+    colVals.forEach((val) => {
+      obj[val] = reportHeader.value.indexOf(val);
+    });
+    return obj;
+  });
+
   const salesmen = computed(() => {
-    const idCol = cols.value["salesperson"];
-    const nameCol = cols.value["salespersonname"];
+    const idCol = cols.value[COL.empID];
+    const nameCol = cols.value[COL.emp];
     const arr: Salesman[] = [];
     report.value.map((row) => {
       const id = row[idCol];
@@ -73,23 +82,23 @@ export const useSls0432Store = defineStore("sls-0432", () => {
   });
 
   const deals = computed(() => {
-    const idCol = cols.value["salesperson"];
-    const unitCol = cols.value["units"];
+    const idCol = cols.value[COL.empID];
+    const unitCol = cols.value[COL.units];
     const deals = report.value.filter(
       (row) => Number(row[idCol]) === currentSalesman.value && row[unitCol] > 0,
     );
     return deals.map((deal) => {
-      const id = deal[cols.value["reference"]];
-      const date = deal[cols.value["date"]];
+      const id = deal[cols.value[COL.dealID]];
+      const date = deal[cols.value[COL.date]];
       const vehicle = new Vehicle(
-        deal[cols.value["stock"]],
-        deal[cols.value["description"]],
-        deal[cols.value["saletype"]],
+        deal[cols.value[COL.vehID]],
+        deal[cols.value[COL.vehDesc]],
+        deal[cols.value[COL.vehType]],
       );
-      const unitCount = deal[cols.value["units"]];
+      const unitCount = deal[unitCol];
       const commission = {
-        gross: deal[cols.value["commblgross"]],
-        amount: deal[cols.value["commissionamount"]],
+        gross: deal[cols.value[COL.commGross]],
+        amount: deal[cols.value[COL.commAmount]],
       };
       return { id, date, vehicle, unitCount, commission };
     });
@@ -139,6 +148,7 @@ export const useSls0432Store = defineStore("sls-0432", () => {
   return {
     reportHeader,
     report,
+    cols,
     salesmen,
     currentSalesman,
     deals,
