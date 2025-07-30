@@ -1,25 +1,24 @@
 <template>
-    <div class="container">
-        <div class="row d-flex justify-content-between">
-            <div class="col-5 d-flex justify-content-evenly">
-                <div class="col-2">{{ deal.date }}</div>
-                <div class="col-2">{{ deal.id }}</div>
-                <div class="col">
-                    <div class="row">
-                        {{ deal.vehicle.id }}
-                    </div>
+    <div class="row d-flex justify-content-between">
+        <div class="col d-flex justify-content-evenly">
+            <div class="col-6 col-md-4 col-lg-2">{{ deal.id }}</div>
+            <div class="col">
+                <div class="row">
+                    {{ deal.vehicle.id }}
+                </div>
+                <div class="d-none d-md-block">
                     <div class="row d-flex justify-content-evenly">
-                        <div class="col">{{ deal.vehicle.year }}</div>
+                        <div class="col-1">{{ deal.vehicle.year }}</div>
                         <div class="col">{{ deal.vehicle.make }}</div>
                         <div class="col">{{ deal.vehicle.model }}</div>
                     </div>
                 </div>
             </div>
-            <div class="col-4 d-flex justify-content-evenly">
-                <div class="col">{{ deal.unitCount }}</div>
-                <div class="col">{{ deal.commission.gross }}</div>
-                <div class="col">{{ deal.commission.amount }}</div>
-            </div>
+        </div>
+        <div class="col-6 col-md-5 col-lg-4 d-flex justify-content-evenly">
+            <div class="col">{{ deal.unitCount }}</div>
+            <div class="col">{{ deal.commission.gross }}</div>
+            <div class="col">{{ deal.commission.amount }}</div>
         </div>
     </div>
 </template>
