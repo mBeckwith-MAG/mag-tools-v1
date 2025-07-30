@@ -1,6 +1,5 @@
 import { computed, ref, type Ref } from "vue";
 import { defineStore } from "pinia";
-import SalesmanOverview from "@/components/sls-bns/SalesmanOverview.vue";
 import type { Salesman } from "@/utils";
 import { COL0432, Deal } from "@/utils";
 

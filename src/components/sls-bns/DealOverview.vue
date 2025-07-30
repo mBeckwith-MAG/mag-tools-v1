@@ -1,36 +1,36 @@
 <template>
-    <div class="row d-flex justify-content-between">
-        <div class="col d-flex justify-content-evenly">
-            <div class="col-6 col-md-4 col-lg-2">{{ deal.id }}</div>
-            <div class="col">
+    <div class="container">
+        <div class="row d-flex justify-content-between">
+            <div class="col-6">
                 <div class="row">
-                    {{ deal.vehicle.id }}
+                    {{ deal.id }}
                 </div>
-                <div class="d-none d-md-block">
-                    <div class="row d-flex justify-content-evenly">
-                        <div class="col-1">{{ deal.vehicle.year }}</div>
-                        <div class="col">{{ deal.vehicle.make }}</div>
-                        <div class="col">{{ deal.vehicle.model }}</div>
-                    </div>
+                <div class="row">
+                    <h5 class="col-12 col-md-6 col-lg-4 col-xl-3">{{ deal.vehicle.id }}</h5>
+                    <div class="col-1">{{ deal.vehicle.year }}</div>
+                    <div class="col d-none d-lg-block">{{ deal.vehicle.make }}</div>
+                    <div class="col">{{ deal.vehicle.model }}</div>
+
+                </div>
+            </div>
+            <div class="col d-flex flex-column align-self-center">
+                <div class="row text-center">
+                    <div class="col">{{ deal.unitCount }}</div>
+                    <div class="col" :class="{'text-danger' : gross < 0}">{{ gross }}</div>
+                    <div class="col">{{ deal.commission.amount }}</div>
                 </div>
             </div>
         </div>
-        <div class="col-6 col-md-5 col-lg-4 d-flex justify-content-evenly">
-            <div class="col">{{ deal.unitCount }}</div>
-            <div class="col">{{ deal.commission.gross }}</div>
-            <div class="col">{{ deal.commission.amount }}</div>
-        </div>
     </div>
+
 </template>
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { storeToRefs } from "pinia";
-import { useSlsBnsStore } from "@/stores/sls-bns";
+import { ref } from "vue";
 import type { Deal } from "@/utils";
 
-const store = useSlsBnsStore();
-const { getGross, getAmount, getUnitCount } = store;
 const props = defineProps<{
     deal: Deal;
 }>();
+
+const gross = ref(props.deal.commission.gross);
 </script>

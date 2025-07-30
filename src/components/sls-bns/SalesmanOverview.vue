@@ -1,33 +1,31 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col">{{ salesman.id }}</div>
-        </div>
+    <div class="container fw-bold">
         <div class="row d-flex justify-content-between">
-            <div class="col-5">{{ salesman.name }}</div>
-            <div class="col-6 d-flex justify-content-evenly">
-                <div class="col">{{ getUnitCount(salesman.id) }}</div>
-                <div class="col">{{ getGross(salesman.id) }}</div>
-                <div class="col">{{ getAmount(salesman.id) }}</div>
+            <div class="col-6">
+                <div class="row">
+                    {{ salesman.id }}
+                </div>
+                <div class="row">
+                    <h3>{{ salesman.name }}</h3>
+                </div>
             </div>
-        </div>
-        <br />
-        <div class="row d-flex justify-content-between fw-bold">
-            <div class="col-5 d-flex justify-content-evenly">
-                <div class="col">Deal</div>
-                <div class="col">Vehicle</div>
-            </div>
-            <div class="col-6 col-md-5 col-lg-4 d-flex justify-content-evenly">
-                <div class="col">Unit</div>
-                <div class="col">Gross</div>
-                <div class="col">Amount</div>
+            <div class="col d-flex flex-column ms-2 align-self-end">
+                <div class="row text-center">
+                    <div class="col">{{ units }}</div>
+                    <div class="col" :class="{'text-danger' : gross < 0}">{{ gross }}</div>
+                    <div class="col">{{ amount }}</div>
+                </div>
+                <div class="row text-center">
+                    <div class="col">Units</div>
+                    <div class="col">Gross</div>
+                    <div class="col">Amount</div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { storeToRefs } from "pinia";
+import { ref } from "vue";
 import { useSlsBnsStore } from "@/stores/sls-bns";
 import type { Salesman } from "@/utils";
 
@@ -36,4 +34,7 @@ const { getGross, getAmount, getUnitCount } = store;
 const props = defineProps<{
     salesman: Salesman;
 }>();
+const units = ref(getUnitCount(props.salesman.id));
+const gross = ref(getGross(props.salesman.id));
+const amount = ref(getAmount(props.salesman.id));
 </script>

@@ -37,7 +37,5 @@ import DealList from "@/components/sls-bns/DealList.vue";
 import SalesmanOverview from "@/components/sls-bns/SalesmanOverview.vue";
 
 const store = useSlsBnsStore();
-const { salesmen, deals } = storeToRefs(store);
-const { getUnitCount, getGross, getAmount } = store;
+const { salesmen } = storeToRefs(store);
 </script>
-<style scoped></style>

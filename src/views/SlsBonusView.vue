@@ -6,7 +6,19 @@
             @clear-data="handleClear"
         />
         <UploadFile
-            id="Roster"
+            id="90"
+            @file-data="handleUpload"
+            @clear-data="handleClear"
+            class="ms-2"
+        />
+        <UploadFile
+            id="3213"
+            @file-data="handleUpload"
+            @clear-data="handleClear"
+            class="ms-2"
+        />
+        <UploadFile
+            id="SPIFFS"
             @file-data="handleUpload"
             @clear-data="handleClear"
             class="ms-2"
@@ -15,25 +27,23 @@
     <SalesmenList />
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSlsBnsStore } from "@/stores/sls-bns";
 import UploadFile from "@/components/sls-bns/UploadFile.vue";
 import SalesmenList from "@/components/sls-bns/SalesmenList.vue";
 
 const store = useSlsBnsStore();
-const { report0432Header, report0432, salesmen } = storeToRefs(store);
+const { report0432Header, report0432 } = storeToRefs(store);
 
-const roster = ref([]);
+
 
 const handleUpload = (result) => {
     switch (result.id) {
         case "0432":
             [report0432Header.value, ...report0432.value] = result.data;
-            salesmen.value;
             break;
-        case "Roster":
-            roster.value = result.data;
+        case "90":
+            [report90Header.value, ...report90.value] = result.data;
             break;
     }
 };
@@ -41,10 +51,16 @@ const handleUpload = (result) => {
 const handleClear = (id) => {
     switch (id) {
         case "0432":
-            report0432.value = [];
+            report0432Header.value, report0432.value = [];
             break;
-        case "Roster":
-            roster.value = [];
+        case "90":
+            report90Header.value, report90.value  = [];
+            break;
+        case "3213":
+            report3213Header.value, report3213.value  = [];
+            break;
+        case "SPIFFS":
+            reportSpiffsHeader.value, reportSpiffs.value  = [];
             break;
     }
 };
