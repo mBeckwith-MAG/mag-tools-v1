@@ -45,6 +45,12 @@ const handleUpload = (result) => {
         case "90":
             [report90Header.value, ...report90.value] = result.data;
             break;
+        case "3213":
+            [report3213Header.value, ...report3213.value] = result.data;
+            break;
+        case "SPIFFS":
+            [reportSpiffsHeader.value, ...reportSpiffs.value] = result.data;
+            break;
     }
 };
 
